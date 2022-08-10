@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/cootstrap.min.css"/>
+        <script src="https://ajax.google.com/ajax.libs.jquery.min.js"></script>
+        <title>Face2Voice result</title>
+    </head>
+
+    <body>
+        <h1>Face2Voice Result Page</h1>
+        <div class="container">
+            <!-- <div class="row"> -->
+                <!-- <h2> Try Face2Voice </h2> -->
+                <!-- <p>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %} 
+                        <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </p> -->
+
+            <!-- {% if filename %} 
+            <div style="padding:20px;">
+                <img src="{{ url_for('display_image', filename=filename) }}">
+            </div>
+            {% endif %}  -->
+
+            <div style="padding:20px;">
+                <img src="{{ url_for('display_image', filename='UseMtcnnToCutOnlyTheFace.jpg')}}" alt="Cropped Face Image" height="560" width="560">
+            </div>
+
+            <p>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %} 
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </p>
+
+            {% if audiofile %} 
+            <div style="padding:20px;">
+                <audio controls="controls">
+                    <source src="{{ url_for('play', audiofile=audiofile) }}" type="audio/wav" />
+                    Your browser does not support the audio element.
+                    </audio>
+            </div>
+            {% endif %} 
+
+            <div>
+                <button type="button" onclick=window.location.href='/'>Info Page</button> 
+                <button type="button" onclick=window.location.href='/main'>Main page</button>
+            </div>
+
+            <!-- </div> -->
+        </div>
+    </body>
+</html>
