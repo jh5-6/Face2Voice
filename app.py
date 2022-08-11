@@ -99,14 +99,16 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
-@app.route('/', methods=['POST'])
 def info():
     return render_template('info.html')
 
 @app.route('/main')
-@app.route('/main', methods=['POST']) 
 def main():
     return render_template('main.html')
+
+@app.route('/references')
+def references():
+    return render_template('references.html')    
 
  #speech synthesize
 @app.route('/result', methods=['POST'])
