@@ -10,29 +10,23 @@
     </head>
 
     <body>
-        <h1>Face2Voice Result Page</h1>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('info')}}"> ABOUT</a></li>
+                    <li><a href="{{ url_for('main')}}"> EXPERIENCE</a></li>
+                    <li><a href="{{ url_for('references')}}"> REFERENCES</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header">
+            <!-- <h1>Face2Voice Result Page</h1> -->
+        </div>
+        
         <div class="container">
-            <!-- <div class="row"> -->
-                <!-- <h2> Try Face2Voice </h2> -->
-                <!-- <p>
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %} 
-                        <ul>
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                </p> -->
-
-            <!-- {% if filename %} 
-            <div style="padding:20px;">
-                <img src="{{ url_for('display_image', filename=filename) }}">
-            </div>
-            {% endif %}  -->
-
-            <div style="padding:20px;">
-                <img src="{{ url_for('display_image', filename='UseMtcnnToCutOnlyTheFace.jpg')}}" alt="Cropped Face Image" height="560" width="560">
+            <div id="image_container">
+                <img src="{{ url_for('display_image', filename='UseMtcnnToCutOnlyTheFace.jpg')}}" alt="Cropped Face Image" height="100%">
             </div>
 
             <p>
@@ -53,13 +47,6 @@
                     </audio>
             </div>
             {% endif %} 
-
-            <div>
-                <button type="button" onclick=window.location.href='/'>Info Page</button> 
-                <button type="button" onclick=window.location.href='/main'>Main page</button>
-            </div>
-
-            <!-- </div> -->
         </div>
     </body>
 </html>

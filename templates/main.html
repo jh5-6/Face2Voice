@@ -7,14 +7,46 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/cootstrap.min.css"/>
         <script src="https://ajax.google.com/ajax.libs.jquery.min.js"></script>
         <title>Face2Voice main</title>
+
+        <script>
+            function setThumbnail(event) {
+                var reader = new FileReader();
+    
+                reader.onload = function(event) {
+    
+                    if (document.querySelector("div#image_container").childElementCount > 0) {
+                        document.querySelector("div#image_container").removeChild(document.querySelector("div#image_container").firstChild);
+                    }
+    
+                    var img = document.createElement("img");
+                    img.setAttribute("src", event.target.result);
+                    img.style.height = "100%";
+                    document.querySelector("div#image_container").appendChild(img);
+                };
+    
+                reader.readAsDataURL(event.target.files[0]);
+            }            
+        </script>
     </head>
 
     <body>
-        <p><h1>Face2Voice Demo Page</h1></p>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('info')}}"> ABOUT</a></li>
+                    <li><a href="{{ url_for('main')}}"> EXPERIENCE</a></li>
+                    <li><a href="{{ url_for('references')}}"> REFERENCES</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header">
+            <!-- <h1>Face2Voice</h1> -->
+        </div>
+
         <div class="container">
-            <div class="row">
-                <form class="p-3 text-center" method="post" action="/result" enctype="multipart/form-data">
-                    <h3> How to use Face2Voice</h3>
+            <div>
+                <form method="post" id="form" action="/result" enctype="multipart/form-data">
                     <ol>
                         <li>
                             <h4> Load a face image to embed </h4>
@@ -27,45 +59,13 @@
                         <li>
                             <h4> Write down the text you want to synthesize </h4>
                             <p>
-                                <textarea cols="100" rows="20" name="inputtext" required >Welcome to the toolbox! To begin, load an face image from your datasets or capture one yourself.&#10;Once its embedding has been created, you can synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds.&#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.&#10;On the left you have the embedding projections. Load or record more images to see them.&#10;If you have at least 2 or 3 images from a same speaker, a cluster should form.&#10;Synthesized utterances are of the same color as the speaker whose voice was used, but they're represented with a cross.</textarea>
+                                <textarea name="inputtext" required >Welcome to the toolbox! To begin, load an face image from your datasets or capture one yourself.&#10;Once its embedding has been created, you can synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds.&#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.&#10;On the left you have the embedding projections. Load or record more images to see them.&#10;If you have at least 2 or 3 images from a same speaker, a cluster should form.&#10;Synthesized utterances are of the same color as the speaker whose voice was used, but they're represented with a cross.</textarea>
                             </p>
                         </li> 
-                        
-                        <li>
-                            <h4> Push the button </h4>
-                            <p>
-                                <input class="btn btn-info" type="submit" value="Speech Synthesis" >
-                            </p> 
-                        </li>
-                    </ol>           
+                    </ol>
+                    <input class="btn-inference" type="submit" value="Speech Synthesis" >
                 </form>
             </div>
-
-            <!-- <div>
-                <button type="button" onclick=window.location.href='/'>Info Page</button> 
-            </div> -->
-
         </div>
-
-
-        <script>
-        function setThumbnail(event) {
-            var reader = new FileReader();
-
-            reader.onload = function(event) {
-
-                if (document.querySelector("div#image_container").childElementCount > 0) {
-                    document.querySelector("div#image_container").removeChild(document.querySelector("div#image_container").firstChild);
-                }
-
-                var img = document.createElement("img");
-                img.setAttribute("src", event.target.result);  
-                document.querySelector("div#image_container").appendChild(img);
-            };
-
-            reader.readAsDataURL(event.target.files[0]);
-        }
-        
-        </script>
     </body>
 </html>
