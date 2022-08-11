@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
+        <title>CONTACTS</title>
+    </head>
+
+    <body>     
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('info')}}"> ABOUT</a></li>
+                    <li><a href="{{ url_for('main')}}"> EXPERIENCE</a></li>
+                    <li><a href="{{ url_for('references')}}"> REFERENCES</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header">
+            <h1>References</h1>
+        </div>
+
+        <div class="container">
+            <div>
+                <h2>Paper</h2>
+                <ol>
+                    <li>참고논문</li>
+                    <li>참고논문</li>
+                    <li>참고논문</li>
+                </ol>
+            </div>
+            <div>
+                <h2>Code</h2>
+                <ol>
+                    <li>참고코드</li>
+                    <li>참고코드</li>
+                    <li>참고코드</li>
+                </ol>
+            </div>
+        </div>
+    </body>
+</html>

@@ -109,7 +109,7 @@ def main():
 @app.route('/references')
 def references():
     return render_template('references.html')    
-
+    
  #speech synthesize
 @app.route('/result', methods=['POST'])
 def result( ):
