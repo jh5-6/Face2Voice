@@ -105,7 +105,7 @@ div#btn input{
    font-size: 18px;
 }
 
-#progressContainer {
+#progress_container {
     visibility: hidden;
 }
 
@@ -125,9 +125,15 @@ div#btn input{
     text-align: right;
 }
 
-#melspectrogram {
+#progress_mel_message {
     visibility: hidden;
 }
+
+#progress_caution_message {
+    visibility: hidden;
+    color: orange;
+}
+
 
 h1 {
     font-size: 3em;

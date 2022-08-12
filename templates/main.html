@@ -50,8 +50,9 @@
                     //입력 사진, 문장 보이지 않게 설정
                     document.getElementById("nav").style.visibility = 'hidden';
                     document.getElementById("form").style.display ='none';
-                    document.getElementById("melspectrogram").style.visibility = 'visible';  
-                    
+                    document.getElementById("progress_mel_message").style.visibility = 'visible';  
+                    document.getElementById("progress_caution_message").style.visibility = 'visible';
+
                     // 일정 간격마다 내장 메소드를 실행
                     // progress bar 길이 update함으로써
                     // 음성 합성 경과를 보여줌
@@ -65,8 +66,8 @@
                             total = response['total'];
 
                             if (progressed != 0 && total != 0) {
-                                document.getElementById("melspectrogram").style.display ='none';
-                                document.getElementById("progressContainer").style.visibility ='visible';
+                                document.getElementById("progress_mel_message").style.display ='none';
+                                document.getElementById("progress_container").style.visibility ='visible';
                                 $('#progress_bar').width((progressed / total) * 100 + "%");  
                                 $('#percent').html(progressed + '/' + total)
                             }
@@ -103,7 +104,7 @@
                         <li>
                             <h4> Load a face image to embed </h4>
                             <p>
-                                <input class="form-control" type="file" name="imagefile" id="image" onchange="setThumbnail(event)" required >
+                                <input class="form-control" type="file" name="imagefile" id="image" onchange="setThumbnail(event)" required  accept=".jpeg, .jpg, .png">
                             </p>
                             <div id="image_container"></div>
                         </li>
@@ -125,15 +126,18 @@
             </div>
 
             <!-- 음성 합성 경과를 보여주는 메시지와 progress bar-->
-            <div id="melspectrogram">
+            <div id="progress_mel_message">
                 <h3>Generating Melspectrograms...</h3>
             </div>
-            <div id="progressContainer">
+            <div id="progress_container">
                 <h3>Synthesizing voice...</h3>
                 <div id="progress">       
                     <div id="progress_bar"></div>
                 </div>
                 <div id="percent"></div>
+            </div>
+            <div id="progress_caution_message">
+                CAUTION: Do not press the Refresh or Back button
             </div>
         </div>
     </body>

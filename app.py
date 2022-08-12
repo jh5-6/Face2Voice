@@ -32,7 +32,7 @@ app.config['GENAUDIO_FOLDER'] = 'static/genAudio'
 mtcnn = MTCNN( image_size=160, margin=0, min_face_size=20, thresholds=[0.6, 0.7, 0.7], factor=0.709, post_process=True, device=device)
 
 # Face2Voice 구현 시 사용한 3가지 모델 
-# Encoder : Lip2Speech의 SpeakerEncoder
+# 1. Encoder : Lip2Speech의 SpeakerEncoder
 net = speaker_encoder.get_network('test')
 state_dict = torch.load('savedmodels/lip2speech_final.pth', map_location=device)
 if 'state_dict' in state_dict: state_dict = state_dict['state_dict']
@@ -43,14 +43,14 @@ for k in list(state_dict.keys()):
 net.load_state_dict(state_dict, strict=True)
 net.eval()
 
-# Synthesizer : SV2TTS의 synthesizer
+# 2. Synthesizer : SV2TTS의 synthesizer
 synthesizer = Synthesizer('savedmodels/synthesizer.pt')
 synthesizer.load()
 
-# Vocoder : SV2TTS의 synthesizer
+# 3. Vocoder : SV2TTS의 synthesizer
 vocoder.load_model('savedmodels/vocoder.pt')
 
-# 이미지 전처리 
+# 이미지 전처리  
 def preprocess_img(fpath):
 
     img = cv2.imread(fpath)    
