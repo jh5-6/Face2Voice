@@ -24,10 +24,13 @@
         </div>
         
         <div class="container">
+
+            <!-- 입력 사진에서 얼굴만 자른 사진 출력 -->
             <div id="image_container">
                 <img src="{{ url_for('display_image', filename='UseMtcnnToCutOnlyTheFace.jpg')}}" alt="Cropped Face Image" height="100%">
             </div>
 
+            <!-- 입력 문장 출력 -->
             <p>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %} 
@@ -38,6 +41,7 @@
                 {% endwith %}
             </p>
 
+            <!-- 합성된 음성 출력 -->
             {% if audiofile %} 
             <div style="padding:20px;">
                 <audio controls="controls">

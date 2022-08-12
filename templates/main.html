@@ -9,15 +9,14 @@
         <title>Face2Voice</title>
 
         <script>
+            //파일에서 불러온 사진 보여줌
             function setThumbnail(event) {
                 var reader = new FileReader();
-    
+
                 reader.onload = function(event) {
-    
                     if (document.querySelector("div#image_container").childElementCount > 0) {
                         document.querySelector("div#image_container").removeChild(document.querySelector("div#image_container").firstChild);
                     }
-    
                     var img = document.createElement("img");
                     img.setAttribute("src", event.target.result);
                     img.style.height = "100%";
@@ -29,15 +28,33 @@
         </script>  
 
         <script>
-            function inference() {
+            // 입력 데이터 -사진, 문장 모두 입력되었는지 확인 
+            // 모두 입력된 경우 return true
+            // 하나라도 입력이 안된 경우 return false
+            function isValidInput() {
                 let img = document.getElementById("image").value; 
                 let txt = document.getElementById("text").value; 
 
                 if (img != "" && txt != "") {
+                    return true
+                }
+
+                return false
+            }
+
+            function showProgress() {
+
+                if (isValidInput()) {
+
+                    //progress bar와 progress 메시지만 보이도록 
+                    //입력 사진, 문장 보이지 않게 설정
                     document.getElementById("nav").style.visibility = 'hidden';
                     document.getElementById("form").style.display ='none';
                     document.getElementById("melspectrogram").style.visibility = 'visible';  
                     
+                    // 일정 간격마다 내장 메소드를 실행
+                    // progress bar 길이 update함으로써
+                    // 음성 합성 경과를 보여줌
                     setInterval(function(){$.ajax({
                         url: '/progress',
                         type: 'POST',
@@ -82,6 +99,7 @@
             <div>
                 <form method="post" id="form" action="/result" enctype="multipart/form-data">
                     <ol>
+                        <!-- 입력 사진 선택 -->
                         <li>
                             <h4> Load a face image to embed </h4>
                             <p>
@@ -90,6 +108,7 @@
                             <div id="image_container"></div>
                         </li>
 
+                        <!-- 입력 문장 작성 -->
                         <li>
                             <h4> Write down the text you want to synthesize </h4>
                             <p>
@@ -97,11 +116,15 @@
                             </p>
                         </li> 
                     </ol>
+
+                    <!-- 음성 합성 버튼 -->
                     <div id="btn">
-                        <input class="btn-inference" type="submit" value="Speech Synthesis" onclick="inference()" >
+                        <input class="btn-inference" type="submit" value="Speech Synthesis" onclick="showProgress()" >
                     </div>       
                 </form>
             </div>
+
+            <!-- 음성 합성 경과를 보여주는 메시지와 progress bar-->
             <div id="melspectrogram">
                 <h3>Generating Melspectrograms...</h3>
             </div>

@@ -19,17 +19,20 @@ app.secret_key = 'super secret key'
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-
-# app.config['MAX_CONTENT_PATH']
+# 입력 사진 첨부 시 확장자 제한
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+# 입력 사진 저장 폴더
 app.config['UPLOAD_FOLDER'] = 'static/images'
+# 합성된 음성 저장 폴더
 app.config['GENAUDIO_FOLDER'] = 'static/genAudio'
 
-#Image process
+# 입력 이미지 전처리 
+# 입력으로 들어온 사진 중 사람의 얼굴 부분만 자르기 위해 사용 
+# face detection model
 mtcnn = MTCNN( image_size=160, margin=0, min_face_size=20, thresholds=[0.6, 0.7, 0.7], factor=0.709, post_process=True, device=device)
 
-# Model
-# Encoder
+# Face2Voice 구현 시 사용한 3가지 모델 
+# Encoder : Lip2Speech의 SpeakerEncoder
 net = speaker_encoder.get_network('test')
 state_dict = torch.load('savedmodels/lip2speech_final.pth', map_location=device)
 if 'state_dict' in state_dict: state_dict = state_dict['state_dict']
@@ -40,13 +43,14 @@ for k in list(state_dict.keys()):
 net.load_state_dict(state_dict, strict=True)
 net.eval()
 
-# Synthesizer
+# Synthesizer : SV2TTS의 synthesizer
 synthesizer = Synthesizer('savedmodels/synthesizer.pt')
 synthesizer.load()
 
-# Vocoder
+# Vocoder : SV2TTS의 synthesizer
 vocoder.load_model('savedmodels/vocoder.pt')
 
+# 이미지 전처리 
 def preprocess_img(fpath):
 
     img = cv2.imread(fpath)    
@@ -64,7 +68,7 @@ def preprocess_img(fpath):
 
     return aligned
 
-
+# 음성 합성
 def inference(face_image, text):
 
     # Speaker Encoding
@@ -88,23 +92,15 @@ def inference(face_image, text):
     breaks = [np.zeros(int(0.15 * Synthesizer.sample_rate))] * len(breaks)
     wav = np.concatenate([i for w, b in zip(wavs, breaks) for i in (w, b)])
 
-    # # Trim excessive silences
-    # if self.ui.trim_silences_checkbox.isChecked():
-    #     wav = encoder.preprocess_wav(wav)
+    # Trim excessive silences
+    # wav = encoder.preprocess_wav(wav)
 
-    # Play it
     wav = wav / np.abs(wav).max() * 0.97
     return wav
 
+# 확장자 검사
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/progress', methods=["POST"])
-def progress():
-    return jsonify({
-        'progressed' : vocoder._model.progressed_task,
-        'total' : vocoder._model.total_task,
-    })
 
 @app.route('/')
 def info():
@@ -120,7 +116,14 @@ def main():
 @app.route('/references')
 def references():
     return render_template('references.html')    
-    
+
+@app.route('/progress', methods=["POST"])
+def progress():
+    return jsonify({
+        'progressed' : vocoder._model.progressed_task,
+        'total' : vocoder._model.total_task,
+    })
+
  #speech synthesize
 @app.route('/result', methods=['POST'])
 def result( ):
@@ -132,26 +135,34 @@ def result( ):
     input_text = request.form['inputtext']
     input_text = str(input_text)
 
+    # 입력 사진 선택하지 않은 경우 
     if imagefile.filename == '':
         flash('No image selected for uploading')
         return redirect(request.url)
 
+    # 입력 문장 작성하지 않은 경우 
     if input_text == '':
         flash('No input text written for uploading')
         return redirect(request.url)
 
+
     if imagefile and allowed_file(imagefile.filename):
-    
+        # 확장자가 png or jpg or jpeg인 경우
+        # 입력 사진 저장 
         filename = secure_filename(imagefile.filename)
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         imagefile.save(image_path)
-
         # flash("Image successfully uploaded and displayed below")
+
+        # 음성 합성 결과 출력 시 
+        # 입력으로 넣은 문장 보여주기 위해 result.html에 입력 문장 넘겨줌
         flash(input_text)
 
+        # 전처리한 이미지와 입력 문장을 이용해 음성 합성
         input_img = preprocess_img(image_path)
         wav = inference(input_img, input_text)
 
+        # 합성된 음성 저장 
         imagename = imagefile.filename.split('.')[0]
         genfilename = "genAudio_" + imagename + ".wav"
         audio_path = os.path.join(app.config['GENAUDIO_FOLDER'], genfilename)
