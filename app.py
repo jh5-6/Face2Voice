@@ -1,5 +1,5 @@
 from fileinput import filename
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
 
 import os 
@@ -42,6 +42,7 @@ net.eval()
 
 # Synthesizer
 synthesizer = Synthesizer('savedmodels/synthesizer.pt')
+synthesizer.load()
 
 # Vocoder
 vocoder.load_model('savedmodels/vocoder.pt')
@@ -98,12 +99,22 @@ def inference(face_image, text):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/progress', methods=["POST"])
+def progress():
+    return jsonify({
+        'progressed' : vocoder._model.progressed_task,
+        'total' : vocoder._model.total_task,
+    })
+
 @app.route('/')
 def info():
     return render_template('info.html')
 
 @app.route('/main')
 def main():
+
+    vocoder._model.progressed_task = 0
+    vocoder._model.total_task = 0
     return render_template('main.html')
 
 @app.route('/references')

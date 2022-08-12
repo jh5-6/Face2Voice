@@ -50,11 +50,11 @@ nav li a:link, a:active, a:visited {
     text-decoration: none;
     color: white;
 }
+
 nav li a:hover {
     text-decoration: none;
     color: rgb(218, 218, 218);
 }
-
 
 div.header {
     margin: 0;
@@ -74,8 +74,6 @@ div.header {
 
 div.container {
 
-    margin: 0;
-
     padding-top: 0px;
     padding-bottom: 0px;
     padding-left: 20px;
@@ -88,15 +86,48 @@ div.container {
     width: 100%
 }
 
-.btn-inference {
-    display :inline-block;
-}
-
-
 #image_container {
     height: 33vh;
 }
 
+#form ol{
+    padding-inline-start: 40px;
+    padding-inline-end: 40px;
+}
+
+#btn {
+    padding-inline-start: 40px;
+    padding-inline-end: 40px;
+    margin-top: 90px;
+}
+
+div#btn input{
+   font-size: 18px;
+}
+
+#progressContainer {
+    visibility: hidden;
+}
+
+#progress {
+    width: 100%;
+    background-color: rgb(242, 242, 242);    
+}
+
+#progress_bar {
+    width: 0%;
+    height: 30px;
+    background-color: green;
+}
+
+#percent {
+    position: relative;
+    text-align: right;
+}
+
+#melspectrogram {
+    visibility: hidden;
+}
 
 h1 {
     font-size: 3em;

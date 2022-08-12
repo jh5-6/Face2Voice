@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <title>Face2Voice</title>
 
         <script>
@@ -25,12 +26,46 @@
     
                 reader.readAsDataURL(event.target.files[0]);
             }            
+        </script>  
+
+        <script>
+            function inference() {
+                let img = document.getElementById("image").value; 
+                let txt = document.getElementById("text").value; 
+
+                if (img != "" && txt != "") {
+                    document.getElementById("nav").style.visibility = 'hidden';
+                    document.getElementById("form").style.display ='none';
+                    document.getElementById("melspectrogram").style.visibility = 'visible';  
+                    
+                    setInterval(function(){$.ajax({
+                        url: '/progress',
+                        type: 'POST',
+                        success: function(response) {
+                            console.log(response);
+
+                            progressed = response['progressed'];
+                            total = response['total'];
+
+                            if (progressed != 0 && total != 0) {
+                                document.getElementById("melspectrogram").style.display ='none';
+                                document.getElementById("progressContainer").style.visibility ='visible';
+                                $('#progress_bar').width((progressed / total) * 100 + "%");  
+                                $('#percent').html(progressed + '/' + total)
+                            }
+                        }, 
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    })}, 100);                    
+                }
+            }            
         </script>
     </head>
-
+       
     <body>
         <div class="menu">
-            <nav>
+            <nav id="nav">
                 <ul>
                     <li><a href="{{ url_for('info')}}"> ABOUT</a></li>
                     <li><a href="{{ url_for('main')}}"> EXPERIENCE</a></li>
@@ -50,7 +85,7 @@
                         <li>
                             <h4> Load a face image to embed </h4>
                             <p>
-                                <input class="form-control" type="file"  name="imagefile" id="image" onchange="setThumbnail(event)" required >
+                                <input class="form-control" type="file" name="imagefile" id="image" onchange="setThumbnail(event)" required >
                             </p>
                             <div id="image_container"></div>
                         </li>
@@ -58,12 +93,24 @@
                         <li>
                             <h4> Write down the text you want to synthesize </h4>
                             <p>
-                                <textarea name="inputtext" required >Welcome to the toolbox! To begin, load an face image from your datasets or capture one yourself.&#10;Once its embedding has been created, you can synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds.&#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.&#10;On the left you have the embedding projections. Load or record more images to see them.&#10;If you have at least 2 or 3 images from a same speaker, a cluster should form.&#10;Synthesized utterances are of the same color as the speaker whose voice was used, but they're represented with a cross.</textarea>
+                                <textarea name="inputtext" id="text" required >Welcome to the toolbox! To begin, load an face image from your datasets or capture one yourself.&#10;Once its embedding has been created, you can synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds.&#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.&#10;On the left you have the embedding projections. Load or record more images to see them.&#10;If you have at least 2 or 3 images from a same speaker, a cluster should form.&#10;Synthesized utterances are of the same color as the speaker whose voice was used, but they're represented with a cross.</textarea>
                             </p>
                         </li> 
                     </ol>
-                    <input class="btn-inference" type="submit" value="Speech Synthesis" >
+                    <div id="btn">
+                        <input class="btn-inference" type="submit" value="Speech Synthesis" onclick="inference()" >
+                    </div>       
                 </form>
+            </div>
+            <div id="melspectrogram">
+                <h3>Generating Melspectrograms...</h3>
+            </div>
+            <div id="progressContainer">
+                <h3>Synthesizing voice...</h3>
+                <div id="progress">       
+                    <div id="progress_bar"></div>
+                </div>
+                <div id="percent"></div>
             </div>
         </div>
     </body>

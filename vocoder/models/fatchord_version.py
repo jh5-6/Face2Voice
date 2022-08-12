@@ -115,6 +115,9 @@ class WaveRNN(nn.Module):
         self.step = nn.Parameter(torch.zeros(1).long(), requires_grad=False)
         self.num_params()
 
+        self.progressed_task = 0 
+        self.total_task = 0
+
     def forward(self, x, mels):
         self.step += 1
         bsize = x.size(0)
@@ -260,6 +263,10 @@ class WaveRNN(nn.Module):
     def gen_display(self, i, seq_len, b_size, gen_rate):
         pbar = progbar(i, seq_len)
         msg = f'| {pbar} {i*b_size}/{seq_len*b_size} | Batch Size: {b_size} | Gen Rate: {gen_rate:.1f}kHz | '
+
+        self.progressed_task = i*b_size
+        self.total_task = seq_len*b_size 
+
         stream(msg)
 
     def get_gru_cell(self, gru):
