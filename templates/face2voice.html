@@ -85,8 +85,8 @@
         <div class="menu">
             <nav id="nav">
                 <ul>
-                    <li><a href="{{ url_for('info')}}"> ABOUT</a></li>
-                    <li><a href="{{ url_for('main')}}"> EXPERIENCE</a></li>
+                    <li><a href="{{ url_for('home')}}"> HOME</a></li>
+                    <li><a href="{{ url_for('face2voice')}}"> TRY FACE2VOICE</a></li>
                     <li><a href="{{ url_for('references')}}"> REFERENCES</a></li>
                 </ul>
             </nav>
@@ -98,7 +98,7 @@
 
         <div class="container">
             <div>
-                <form method="post" id="form" action="/result" enctype="multipart/form-data">
+                <form method="post" id="form" action="/face2voice_result" enctype="multipart/form-data">
                     <ol>
                         <!-- 입력 사진 선택 -->
                         <li>

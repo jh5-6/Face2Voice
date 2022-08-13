@@ -103,15 +103,15 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
-def info():
-    return render_template('info.html')
+def home():
+    return render_template('home.html')
 
-@app.route('/main')
-def main():
+@app.route('/face2voice')
+def face2voice():
 
     vocoder._model.progressed_task = 0
     vocoder._model.total_task = 0
-    return render_template('main.html')
+    return render_template('face2voice.html')
 
 @app.route('/references')
 def references():
@@ -125,8 +125,8 @@ def progress():
     })
 
  #speech synthesize
-@app.route('/result', methods=['POST'])
-def result( ):
+@app.route('/face2voice_result', methods=['POST'])
+def face2voice_result( ):
     if 'imagefile' not in request.files:
         flash('No file part')
         return redirect(request.url)
@@ -155,7 +155,7 @@ def result( ):
         # flash("Image successfully uploaded and displayed below")
 
         # 음성 합성 결과 출력 시 
-        # 입력으로 넣은 문장 보여주기 위해 result.html에 입력 문장 넘겨줌
+        # 입력으로 넣은 문장 보여주기 위해 face2voice_result.html에 입력 문장 넘겨줌
         flash(input_text)
 
         # 전처리한 이미지와 입력 문장을 이용해 음성 합성
@@ -168,7 +168,7 @@ def result( ):
         audio_path = os.path.join(app.config['GENAUDIO_FOLDER'], genfilename)
         sf.write(audio_path, wav, Synthesizer.sample_rate)
      
-        return render_template('result.html', filename = filename, audiofile = genfilename)
+        return render_template('face2voice_result.html', filename = filename, audiofile = genfilename)
 
     else:
         # flash('Allowed image types are - png, jpg, jpeg')
