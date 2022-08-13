@@ -112,6 +112,7 @@ div#btn input{
 #progress {
     width: 100%;
     background-color: rgb(242, 242, 242);    
+    overflow: hidden;
 }
 
 #progress_bar {
@@ -120,12 +121,35 @@ div#btn input{
     background-color: green;
 }
 
+#infinite_progress {
+    width: 100%;
+    background-color: rgb(242, 242, 242);    
+    overflow: hidden;
+}
+
+#infinite_progressbar {
+    width: 30%;
+    height: 30px;
+    left: -100%;
+    background-color: green;
+    animation: loading 2s ease-in 0.5s infinite;
+  }
+  
+@keyframes loading {
+    0% {
+        transform:translateX(-100%)
+    }
+    to {
+        transform:translateX(400%)
+    }
+}
+
 #percent {
     position: relative;
     text-align: right;
 }
 
-#progress_mel_message {
+#progress_mel_container {
     visibility: hidden;
 }
 
