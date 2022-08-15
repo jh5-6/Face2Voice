@@ -20,36 +20,42 @@
         </div>
 
         <div class="header">
-            <!-- <h1>Face2Voice Result Page</h1> -->
+            <h1>Check your voice!</h1>
         </div>
         
         <div class="container">
+            <div id="sub_container">     
+                <div id="result_container">
+                    <!-- 입력 사진에서 얼굴만 자른 사진 출력 -->
+                    {% if cropimagefile %}
+                    <div id="image_container">
+                        <img src="{{ url_for('static', filename=cropimagefile)}}" alt="Cropped Face Image">
+                    </div>
+                    {% endif %} 
 
-            <!-- 입력 사진에서 얼굴만 자른 사진 출력 -->
-            <div id="image_container">
-                <img src="{{ url_for('display_image', filename='UseMtcnnToCutOnlyTheFace.jpg')}}" alt="Cropped Face Image" height="100%">
+                    <!-- 입력 문장 출력 -->
+                    <h5> "
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %} 
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        "
+                    </h5>
+
+                    <!-- 합성된 음성 출력 -->
+                    {% if audiofile %} 
+                    <div style="padding:20px;">
+                        <audio controls="controls">
+                            <source src="{{ url_for('static', filename=audiofile) }}" type="audio/wav" />
+                            Your browser does not support the audio element.
+                            </audio>
+                    </div>
+                    {% endif %} 
+                </div>
             </div>
-
-            <!-- 입력 문장 출력 -->
-            <p>
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %} 
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </p>
-
-            <!-- 합성된 음성 출력 -->
-            {% if audiofile %} 
-            <div style="padding:20px;">
-                <audio controls="controls">
-                    <source src="{{ url_for('play', audiofile=audiofile) }}" type="audio/wav" />
-                    Your browser does not support the audio element.
-                    </audio>
-            </div>
-            {% endif %} 
         </div>
     </body>
 </html>
