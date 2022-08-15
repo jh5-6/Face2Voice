@@ -7,7 +7,11 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <title>Face2Voice</title>
-
+        <style>
+                div li p{
+                        text-align:center;
+                }
+        </style>
         <script>
             //파일에서 불러온 사진 보여줌
             function setThumbnail(event) {
@@ -102,7 +106,7 @@
         <div class="container">
             <div>
                 <form method="post" id="form" action="/face2voice_result" enctype="multipart/form-data">
-                    <ol>
+<!--                     <ol> -->
                         <!-- 입력 사진 선택 -->
                         <li>
                             <h4> Load a face image to embed </h4>
@@ -116,10 +120,10 @@
                         <li>
                             <h4> Write down the text you want to synthesize </h4>
                             <p>
-                                <textarea name="inputtext" id="text" required >Welcome to the toolbox! To begin, load an face image from your datasets or capture one yourself.&#10;Once its embedding has been created, you can synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds.&#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.&#10;On the left you have the embedding projections. Load or record more images to see them.&#10;If you have at least 2 or 3 images from a same speaker, a cluster should form.&#10;Synthesized utterances are of the same color as the speaker whose voice was used, but they're represented with a cross.</textarea>
+                                <textarea name="inputtext" id="text" required >Welcome to the toolbox! Can you guess what my voice is like?</textarea>
                             </p>
                         </li> 
-                    </ol>
+<!--                     </ol> -->
 
                     <!-- 음성 합성 버튼 -->
                     <div id="btn">
