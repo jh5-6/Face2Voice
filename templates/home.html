@@ -24,13 +24,13 @@
         </div>
 
         <div class="container">
-            <img src = "img2.jpg"><br>
+            <img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"><br>
             <audio controls="controls">
-                    <source src="img2.mp4" type="audio/wav"/>
+                <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
             </audio>
             <p>original audio</p>
             <audio controls="controls">
-                    <source src="genAudio_img2.wav" type="audio/wav"/>
+                <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
             </audio>
             <p>Predicted audio</p>
             <br><br>

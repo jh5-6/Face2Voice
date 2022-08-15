@@ -26,9 +26,11 @@
         <div class="container">
 
             <!-- 입력 사진에서 얼굴만 자른 사진 출력 -->
+            {% if cropimagefile %}
             <div id="image_container">
-                <img src="{{ url_for('display_image', filename='UseMtcnnToCutOnlyTheFace.jpg')}}" alt="Cropped Face Image" height="100%">
+                <img src="{{ url_for('static', filename=cropimagefile)}}" alt="Cropped Face Image" height="100%">
             </div>
+            {% endif %} 
 
             <!-- 입력 문장 출력 -->
             <p>
@@ -45,7 +47,7 @@
             {% if audiofile %} 
             <div style="padding:20px;">
                 <audio controls="controls">
-                    <source src="{{ url_for('play', audiofile=audiofile) }}" type="audio/wav" />
+                    <source src="{{ url_for('static', filename=audiofile) }}" type="audio/wav" />
                     Your browser does not support the audio element.
                     </audio>
             </div>
