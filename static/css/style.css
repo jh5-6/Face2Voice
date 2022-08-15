@@ -1,8 +1,18 @@
 body {
+    position: relative;
+    
     margin: 0;
     background : #E2E2E2;
+
   }
 
+div{
+    text-align:center;
+}
+
+div li{
+    list-style:none;
+}
 div.menu {
 
     background: black;
@@ -63,18 +73,18 @@ div.header {
     padding-top: 50px;
     padding-bottom: 0px;
     padding-left: 20px;
-    padding-right: 20px;
+    #padding-right: 20px;
 
     position: relative;
 
     margin: 0;
 
-    max-width: 609px;
+/*     max-width: 609px; */
     width: 100%
 }
 
-div.container {
 
+div.container {
     padding-top: 0px;
     padding-bottom: 0px;
     padding-left: 20px;
@@ -83,12 +93,13 @@ div.container {
     align-items: center; 
     position: relative;
 
-    max-width: 609px;
+/*     max-width: 609px; */
     width: 100%;
 }
 
 div.container li a{
     text-decoration: none;
+    font-size:large;
     color : black;
 }
 
@@ -100,7 +111,10 @@ div.container li a:hover{
 #image_container {
     height: 33vh;
 }
-
+.mark{
+    font-size: small;
+    color:gray;
+}
 #form ol{
     padding-inline-start: 40px;
     padding-inline-end: 40px;
@@ -182,4 +196,5 @@ textarea {
 
 p.output{
     background:white;
+    font-size: 30px;
 }
