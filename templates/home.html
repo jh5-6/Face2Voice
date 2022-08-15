@@ -24,21 +24,97 @@
         </div>
 
         <div class="container">
-            <img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"><br>
-            <audio controls="controls">
-                <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
-            </audio>
-            <p>original audio</p>
-            <audio controls="controls">
-                <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
-            </audio>
-            <p>Predicted audio</p>
-            <br><br>
-            <p>Face2Speech는 얼굴을 입력으로 받아 그에 해당하는 얼굴을 출력하는 프로그램입니다. <br>
-                음성으로 변환을 원하는 얼굴 이미지를 넣어 원하는 텍스트로 음성을 들어보세요.</p>
-            <p>Face2spech is a program that receives a face as an input and outputs a corresponding face. <br>
-                Put the face image you want to convert to voice and listen to the voice in the text you want.</p>
+            <div id="sub_container">
+                <div id="home_visual_container">  
+                    <table>
+                        <tr>
+                            <td><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
+                            <td><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
+                            <td><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
+                            <td><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <h5>original audio</h5>
+                                    <audio controls="controls">
+                                        <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
+                                    </audio>       
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <h5>original audio</h5>
+                                    <audio controls="controls">
+                                        <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
+                                    </audio>       
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <h5>original audio</h5>
+                                    <audio controls="controls">
+                                        <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
+                                    </audio>       
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <h5>original audio</h5>
+                                    <audio controls="controls">
+                                        <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
+                                    </audio>       
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <div>
+                                    <h5>Predicted audio</h5>
+                                    <audio controls="controls">
+                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td> 
+                                <div>
+                                    <h5>Predicted audio</h5>
+                                    <audio controls="controls">
+                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td> 
+                                <div>
+                                    <h5>Predicted audio</h5>
+                                    <audio controls="controls">
+                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td> 
+                                <div>
+                                    <h5>Predicted audio</h5>
+                                    <audio controls="controls">
+                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div id="home_text_container">
+                    <div id="text_kor">
+                        Face2Speech는 얼굴을 입력으로 받아 그에 해당하는 얼굴을 출력하는 프로그램입니다. <br>
+                        음성으로 변환을 원하는 얼굴 이미지를 넣어 원하는 텍스트로 음성을 들어보세요.
+                    </div>
+                    <div id="text_en">
+                        Face2spech is a program that receives a face as an input and outputs a corresponding face. <br>
+                        Put the face image you want to convert to voice and listen to the voice in the text you want.
+                    </div>
+                </div>
+            </div>
         </div>
-
     </body>
 </html>
