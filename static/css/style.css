@@ -78,13 +78,8 @@ div.container #sub_container{
     padding-bottom: 9%;
 }
 
-#paper_container h2, #code_container h2 {
-    color: rgb(58, 57, 57);
-}
-
 #paper_container, #code_container {
     padding-bottom: 5%;
-    font-size: 1.2em;
 }
 
 div.container li a{
@@ -131,6 +126,9 @@ li #image{
 
 #btn_input li#btn #btn_inference, #btn_again{
     margin: 10px 20px 10px 0;
+    padding-left: 30px;
+    padding-right: 30px;
+
     display: inline-block;
     text-align: center;
     line-height: 50px;
@@ -140,8 +138,7 @@ li #image{
     box-shadow: 0px 5px 0px 0px #000000;
     border-radius: 10px;
     transition: all 0.2s ;
-    font-size: 1.3em;
-  
+    font-size: 1em;
 }
 
 #btn_input li#btn #btn_inference:hover, #btn_again:hover {
@@ -281,6 +278,7 @@ h2 {
 
 h3 {
     font-size: 1.7em;
+    color: rgb(58, 57, 57);
 }
 
 h4 {
