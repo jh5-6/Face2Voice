@@ -78,13 +78,17 @@ div.container #sub_container{
     padding-bottom: 9%;
 }
 
+#paper_container h2, #code_container h2 {
+    color: rgb(58, 57, 57);
+}
+
 #paper_container, #code_container {
     padding-bottom: 5%;
+    font-size: 1.2em;
 }
 
 div.container li a{
     text-decoration: none;
-    font-size:large;
     color : black;
 }
 
@@ -101,9 +105,6 @@ div.container li a:hover{
     height: 100%;
 }
 
-ol #mark{
-    color:gray;
-}
 
 li #image{
     height: 100%;
@@ -137,7 +138,7 @@ li #image{
 
     background-color: rgb(58, 57, 57);
     box-shadow: 0px 5px 0px 0px #000000;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: all 0.2s ;
     font-size: 1.3em;
   
@@ -167,12 +168,16 @@ div#inference_progress {
 }
 
 #percent{
-    font-size: 1.2em;
-    text-align: right;
+    float: right;
+}
+
+span {
+    font-size: 1.3em;
 }
 
 #progress {
     width: 100%;
+    margin-top: 1%;
     background-color: rgb(242, 242, 242);   
     border-radius: 5px; 
     overflow: hidden;
@@ -186,6 +191,7 @@ div#inference_progress {
 
 #infinite_progress {
     width: 100%;
+    margin-top: 1%;
     background-color: rgb(242, 242, 242);    
     overflow: hidden;
     border-radius: 5px;
@@ -194,7 +200,7 @@ div#inference_progress {
 #infinite_progressbar {
     width: 30%;
     height: 5vh;
-    left: -200%;
+    left: -400%;
     background-color: green;  
     animation: loading 2s ease-in 0.5s infinite;
   }
@@ -212,6 +218,7 @@ div#inference_progress {
     width: 100%;
     height: 10%;
     font-size: 1.3em;
+    font-weight: bold;
 }
 
 #progress_caution_message img {
@@ -227,18 +234,24 @@ textarea {
     font-size: 16px;
 }
 
-#home_visual_container{
+table{
     width: 100%;
-    text-align: center;   
 }
 
-#home_visual_container table img{
-    width: 90%;
+#line {
+    color: rgb(242, 242, 242);  
+    border-style: solid;
+    margin-top: 5%;
+}
+
+tr#row_padding{
+    padding-top: 10px;
 }
 
 #home_text_container {
-    padding: 5%;
+    font-style: italic;
     font-size: 1.3em;
+    line-height: 1.8em;
 }
 
 #text_kor, #text_en{
