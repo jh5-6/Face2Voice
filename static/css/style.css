@@ -7,7 +7,7 @@ body {
     margin: 0;
     background : #E2E2E2;
     font-family: 'NanumGothic', 'serif';
-    font-size: 16px;
+    font-size: calc(12px + 0.390625vw);
   }
 
 div.menu {
@@ -40,7 +40,7 @@ nav ul {
 nav li {
     clear: both;
     font-family: 'Arial',Arial,sans-serif;
-    font-size: 16px;
+    font-size: 0.9em;
     display: inline-block;
     padding-left: 15px;
     padding-right: 15px;
@@ -250,12 +250,12 @@ tr#row_padding{
 
 #home_text_container {
     font-style: italic;
-    font-size: 1.3em;
-    line-height: 1.8em;
+    line-height: 1.6em;
 }
 
 #text_kor, #text_en{
     margin-top: 5%;
+    font-size: 1em;
 }
 
 .header h2 {
@@ -273,7 +273,6 @@ h1{
     padding-top: 5%;
 
     font-size: 3em;
-    font-weight: bold;
 }
 
 h2 {
