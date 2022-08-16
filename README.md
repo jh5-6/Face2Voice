@@ -24,7 +24,7 @@ Predict the voice that fits your face and read the phrase you want with that voi
 
 <br><br>
 
-Face2Voice project is maintained By [Hyunghee Park](https://github.com/jh5-6) , [Gaeun Kim](https://github.com/nsense-gekim) , [Minha Bae](https://github.com/)
+Face2Voice project is maintained By [Hyunghee Park](https://github.com/jh5-6) , [Gaeun Kim](https://github.com/nsense-gekim) , [Minha Bae](https://github.com/shin1038)
 
 <br>
 
@@ -44,7 +44,7 @@ DataSet
   <img src="https://ifh.cc/g/Okw4yo.jpg" width="480"/>
 </div>
 
-We used the [avspeech](https://looking-to-listen.github.io/avspeech/download.html) dataset.
+We learned the lip2speech model using [avspeech](https://looking-to-listen.github.io/avspeech/download.html) data.
 
 <br>
 
