@@ -64,7 +64,7 @@
                             total = response['total'];
 
                             if (progressed != 0 && total != 0) {
-                                $('#progress_status').text("Mel Spectrogram Generation Completed!");
+                                $('#progress_status').text("Embedding creation complete!");
                                 document.getElementById("infinite_progress").style.backgroundColor = "green";
                                 document.getElementById("infinite_progressbar").style.visibility ='none';
                 
@@ -100,7 +100,7 @@
                         <ol>
                             <!-- 입력 사진 선택 -->
                             <li>
-                                <h4> Load a face image to embed </h4>
+                                <h4>Load the face image to be used to create the embedding</h4>
                                 <p>
                                     <input class="form-control" type="file" name="imagefile" id="image" onchange="setThumbnail(event)" required  accept=".jpeg, .jpg, .png">
                                 </p>
@@ -109,16 +109,16 @@
 
                             <!-- 입력 문장 작성 -->
                             <li>
-                                <h4> Write down the text you want to synthesize </h4>
+                                <h4>Write the text you want to synthesize</h4>
                                 <p>
-                                    <textarea name="inputtext" id="text" required >Welcome to the toolbox! To begin, load an face image from your datasets or capture one yourself.&#10;Once its embedding has been created, you can synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds.&#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.&#10;On the left you have the embedding projections. Load or record more images to see them.&#10;If you have at least 2 or 3 images from a same speaker, a cluster should form.&#10;Synthesized utterances are of the same color as the speaker whose voice was used, but they're represented with a cross.</textarea>
+                                    <textarea name="inputtext" id="text" required >Welcome to the Face2Voice!&#10;To begin, load an face image from your datasets.Once its embedding has been created, then synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds. &#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.</textarea>
                                 </p>
                             </li> 
                         </ol>
                         <ol id="btn_input">
                             <li id="btn">
                                 <!-- 음성 합성 버튼 -->
-                                <input id="btn_inference" type="submit" value="Speech Synthesis" onclick="showProgress()" >
+                                <input id="btn_inference" type="submit" value="Synthesizing voice" onclick="showProgress()" >
                             </li>  
                         </ol>   
                     </form>
@@ -127,7 +127,7 @@
                 <div id="inference_progress">
                     <!-- 음성 합성 경과를 보여주는 메시지와 progress bar-->
                     <div id="progress_mel_container">
-                        <span id="progress_status">Generating Melspectrograms...</span>
+                        <span id="progress_status">Creating Embedding...</span>
                         <div id="infinite_progress">
                             <div id="infinite_progressbar"></div>
                         </div>
