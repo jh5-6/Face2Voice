@@ -1,5 +1,53 @@
 # Face2Voice
 
+Info 
+------
+<div align = "center">
+  <img src="https://ifh.cc/g/Q72qAF.jpg" width = "480" >
+</div>
+
+
+<br>
+
+<div align="center">
+  
+  |Image Input|Text Input|Voice Output|
+  |---|---|---|
+  |<img src="https://ifh.cc/g/f0HMGb.jpg" width="240"/>|Hi, The weather is nice today.|<img src="https://ifh.cc/g/yCo0x3.gif" width="240"/>|
+  
+  
+</div>
+
+When you insert a face and text, the voice that matches the face reads the text.
+
+Predict the voice that fits your face and read the phrase you want with that voice.
+
+<br><br>
+
+Face2Voice project is maintained By [Hyunghee Park](https://github.com/jh5-6) , [Gaeun Kim](https://github.com/nsense-gekim) , [Minha Bae](https://github.com/)
+
+<br>
+
+Face2Voice is a face speech conversion program, mainly based on [SV2TTS](https://github.com/CorentinJ/Real-Time-Voice-Cloning), [Lip2Speech](https://github.com/Chris10M/Lip2Speech)
+
+<!-- <br>
+
+When you insert a face and text, the voice that matches the face reads the text.
+
+Predict the voice that fits your face and read the phrase you want with that voice. -->
+
+<br>
+
+DataSet
+------
+<div align="left">
+  <img src="https://ifh.cc/g/Okw4yo.jpg" width="480"/>
+</div>
+
+We used the [avspeech](https://looking-to-listen.github.io/avspeech/download.html) dataset.
+
+<br>
+
 Setup 
 ------
 ### 1. Install Requirements 
@@ -26,3 +74,5 @@ Use the flask command
 ```python app.py```
 or
 ```flask run```
+
+
