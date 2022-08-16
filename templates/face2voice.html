@@ -50,7 +50,7 @@
                     document.getElementById("nav").style.visibility = 'hidden';
                     document.getElementById("form").style.display ='none';
                     document.getElementById("inference_progress").style.display = 'initial'; 
-
+                    
                     // 일정 간격마다 내장 메소드를 실행
                     // progress bar 길이 update함으로써
                     // 음성 합성 경과를 보여줌
@@ -88,6 +88,7 @@
                     <li><a href="{{ url_for('home')}}"> HOME</a></li>
                     <li><a href="{{ url_for('face2voice')}}"> TRY FACE2VOICE</a></li>
                     <li><a href="{{ url_for('references')}}"> REFERENCES</a></li>
+                    <li><a href="https://github.com/jh5-6/Face2Voice"> GITHUB</a></li>
                 </ul>
             </nav>
         </div>
@@ -126,17 +127,17 @@
                 <div id="inference_progress">
                     <!-- 음성 합성 경과를 보여주는 메시지와 progress bar-->
                     <div id="progress_mel_container">
-                        <h4 id="progress_status">Generating Melspectrograms...</h4>
+                        <span id="progress_status">Generating Melspectrograms...</span>
                         <div id="infinite_progress">
                             <div id="infinite_progressbar"></div>
                         </div>
                     </div>
                     <div id="progress_container">
-                        <h4>Synthesizing voice...</h4>  
+                        <span>Synthesizing voice...</span>  
+                        <span id="percent"></span>
                         <div id="progress">       
                             <div id="progress_bar"></div>
                         </div>
-                        <div id="percent"></div>
                     </div>
                     <div id="progress_caution_message">
                         <img src="{{ url_for('static', filename='images/icon/caution.png') }}">
