@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <title>Face2Voice</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,7 +67,8 @@
                             total = response['total'];
 
                             if (progressed != 0 && total != 0) {
-                                $('#progress_status').text("Embedding creation complete!");
+                                $('#infinite_progress_status').text("Embedding creation complete!");
+                                $('#progress_status').text("Synthesizing voice...");
                                 document.getElementById("infinite_progress").style.backgroundColor = "green";
                                 document.getElementById("infinite_progressbar").style.visibility ='none';
                 
@@ -110,7 +112,7 @@
                             <!-- 입력 문장 작성 -->
                             <li>
                                 <p>Write the text you want to synthesize</p>
-                                <p><textarea name="inputtext" id="text" required >Welcome to the Face2Voice!&#10;To begin, load an face image from your datasets.Once its embedding has been created, then synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds. &#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.</textarea></p>
+                                <p><textarea name="inputtext" id="text" required >Welcome to the Face2Voice!&#10;To begin, load an face image from your datasets. Once its embedding has been created, then synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds. &#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.</textarea></p>
                             </li> 
                         </ol>
                         <ol id="btn_input">
@@ -129,13 +131,13 @@
                     </div>
                     <!-- 음성 합성 경과를 보여주는 메시지와 progress bar-->
                     <div id="progress_mel_container">
-                        <span id="progress_status">Creating Embedding...</span>
+                        <span id="infinite_progress_status">Creating Embedding...</span>
                         <div id="infinite_progress">
                             <div id="infinite_progressbar"></div>
                         </div>
                     </div>
                     <div id="progress_container">
-                        <span>Synthesizing voice...</span>  
+                        <span id="progress_status"></span>  
                         <span id="percent"></span>
                         <div id="progress">       
                             <div id="progress_bar"></div>

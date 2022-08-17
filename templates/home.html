@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <title>Face2Voice</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,25 +46,23 @@
 
                 <div id="example_container">
                     <h3> Face2Voice Examples </h3>
-                    <table>
+                    <table id="table_home">
                         <tr>
-                            <td><p>Input text</p></td>
-                            <td colspan="4">
+                            <td id="table_split"><p>Input Text</p></td>
+                            <td colspan="4" id="table_padding">
                                 <h5> " Put the face image you want to convert to voice and listen to the voice in the text you want. "</h5>
                             </td>
                         </tr>
                         <tr>
-                            <td><p>Input image </p></td>
-                            <td><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
-                            <td><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
-                            <td><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
-                            <td><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
+                            <td id="table_split"><p>Input Image </p></td>
+                            <td id="table_padding"><img src="{{ url_for('static', filename='images/home_image/example.jpg') }}"></td>
+                            <td><img src="{{ url_for('static', filename='images/home_image/example2.jpg') }}"></td>
+                            <td><img src="{{ url_for('static', filename='images/home_image/example3.jpg') }}"></td>
+                            <td><img src="{{ url_for('static', filename='images/home_image/example4.jpg') }}"></td>
                         </tr>
                         <tr>
-                            <td>
-                                <p>Synthesized voice</p>
-                            </td>
-                            <td> 
+                            <td id="table_split"><p>Synthesized Voice</p></td>
+                            <td id="table_padding">
                                 <div>     
                                     <audio controls="controls">
                                         <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
@@ -73,31 +72,29 @@
                             <td> 
                                 <div>
                                     <audio controls="controls">
-                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
+                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example2.wav') }}" type="audio/wav" />
                                     </audio>
                                 </div>
                             </td>
                             <td> 
                                 <div>
                                     <audio controls="controls">
-                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
+                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example3.wav') }}" type="audio/wav" />
                                     </audio>
                                 </div>
                             </td>
                             <td> 
                                 <div>
                                     <audio controls="controls">
-                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example.wav') }}" type="audio/wav" />
+                                        <source src="{{ url_for('static', filename='audio/home_audio/gen_example4.wav') }}" type="audio/wav" />
                                     </audio>
                                 </div>
                             </td>
                         </tr>
-                    </table>
 
-                    <table>
                         <tr>
-                            <td><p>Original voice</p></td>
-                            <td>
+                            <td id="table_split"><p>Original Voice</p></td>
+                            <td id="table_padding">
                                 <div>
                                     <audio controls="controls">
                                         <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
@@ -107,21 +104,21 @@
                             <td>
                                 <div>
                                     <audio controls="controls">
-                                        <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
+                                        <source src="{{ url_for('static', filename='audio/home_audio/example2.mp3') }}" type="audio/mp3"/>
                                     </audio>       
                                 </div>
                             </td>
                             <td>
                                 <div>
                                     <audio controls="controls">
-                                        <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
+                                        <source src="{{ url_for('static', filename='audio/home_audio/example3.mp3') }}" type="audio/mp3"/>
                                     </audio>       
                                 </div>
                             </td>
                             <td>
                                 <div>
                                     <audio controls="controls">
-                                        <source src="{{ url_for('static', filename='audio/home_audio/example.mp3') }}" type="audio/mp3"/>
+                                        <source src="{{ url_for('static', filename='audio/home_audio/example4.mp3') }}" type="audio/mp3"/>
                                     </audio>       
                                 </div>
                             </td>

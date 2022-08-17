@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <title>Face2Voice</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,43 +25,50 @@
         </div>
 
         <div class="header">
-            <h1>Check your voice!</h1>
+            {% if resultmessage %}
+            <h1>{{ resultmessage }}</h1>
+            {% endif %} 
         </div>
         
         <div class="container">
             <div id="sub_container">     
-                <div id="result_container">
-                    <!-- 입력 사진에서 얼굴만 자른 사진 출력 -->
-                    {% if cropimagefile %}
-                    <div id="image_container">
-                        <img src="{{ url_for('static', filename=cropimagefile)}}" alt="Cropped Face Image">
-                        <div id="result_textbox">
-                            {% with messages = get_flashed_messages() %}
-                            {% if messages %} 
-                            {% for message in messages %}
-                                {{ message }}
-                            {% endfor %}
+                <table id="table_result">
+                    <tr id="table_result_row1">
+                        <td id="table_result_col1">
+                            {% if cropimagefile %}
+                            <div id="image_container">
+                                <img src="{{ url_for('static', filename=cropimagefile)}}" alt="Cropped Face Image">
+                            </div>
                             {% endif %}
-                        {% endwith %}
-                        </div>
-                    </div>
-                    {% endif %} 
-
-                    <!-- 합성된 음성 출력 -->
-                    {% if audiofile %} 
-                    <div style="padding:20px;">
-                        <audio controls="controls">
-                            <source src="{{ url_for('static', filename=audiofile) }}" type="audio/wav" />
-                            Your browser does not support the audio element.
+                        </td>
+                        <td id="table_result_col2">
+                            {% if inputtext %} 
+                            <div id="result_inputtext">
+                                {{ inputtext }}
+                            </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="table_result_col1">
+                            {% if audiofile %} 
+                            <audio controls="controls" id="result_audio">
+                                <source src="{{ url_for('static', filename=audiofile) }}" type="audio/wav" />
+                                Your browser does not support the audio element.
                             </audio>
-                    </div>
-                    {% endif %} 
-                </div>
-                <div id="btn_input">
-                    <div id="btn">
-                        <button id="btn_again" type="button" onclick=window.location.href="{{ url_for('face2voice')}}">DO IT AGAIN</button>
-                    </div>  
-                </div>   
+                            {% endif %} 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="btn_input">
+                                <div id="btn">
+                                    <button id="btn_again" type="button" onclick=window.location.href="{{ url_for('face2voice')}}">DO IT AGAIN</button>
+                                </div>  
+                            </div>  
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </body>

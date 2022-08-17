@@ -86,19 +86,58 @@ div.container #sub_container{
     font: 1.4em;
 }
 
-#result_textbox {
-    float: right;
-    overflow: auto;
 
-    width: 70%;
-    height: 29vh;
-    margin-left: 1%;
+table img{
+    width: 95%;
+}
+
+#table_split {
+    border-right: 10px solid #dadada;
+    padding-right: 2%;
+    text-align: right;
+    border-spacing: 0px;
+}
+
+#table_padding {
+    padding-left: 2%;
+}
+
+#table_result {
+    width: 100%;
+    border-spacing: 30px;
+}
+
+#result_inputtext {
+    overflow: auto;
+    width: 95%;
+    height: 100%;
+    margin: auto;
     padding: 2%;
-    border-radius: 10px;
-    border-style: dotted rgb(242, 242, 242); 
-    /* background-color: rgb(242, 242, 242);  */
+    border-style: solid;
+    border-color: rgb(242, 242, 242);
+    border-width: 3px 0px 3px 0px; 
     font-size: 1.3em;
     font-weight: 400;
+}
+
+#table_result_col1 {
+    column-width: 30vw;
+}
+
+#table_result_col1 img {
+    width: 100%;
+}
+
+#result_inputtext {
+    min-height: 25vh;
+}
+
+#table_result_col2 {
+    column-width: 70vw;
+}
+
+#table_result #btn_input{
+    margin-top: 5%;
 }
 
 div.container li a{
@@ -128,11 +167,6 @@ input#image {
 #form ol li p{
     margin-top: 3%;
     font-size: 1.5em;
-}
-
-#result_container {
-    padding-top: 5%;
-    padding-bottom: 5%;
 }
 
 #btn_input{
@@ -189,6 +223,7 @@ div#inference_progress {
 #percent{
     float: right;
     font-weight: bold;
+    font-size: 1em;
 }
 
 span {
@@ -248,16 +283,16 @@ span {
 }
 
 textarea {
-    padding: auto;
+    padding: 1%;
     width: 95%; 
     height: 9em; 
     font-size: 0.7em;
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
-table{
-    width: 100%;
+#table_home{
     text-align: left;
+    column-width: 19vw;
 }
 
 #line {
@@ -275,6 +310,7 @@ table{
 
 #example_container {
     margin-top: 5%;
+    margin-bottom: 1%;
 }
 
 .header h2 {
