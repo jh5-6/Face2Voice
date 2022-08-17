@@ -4,9 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
-        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <title>Face2Voice</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
 
         <script>
             //파일에서 불러온 사진 보여줌
@@ -100,31 +102,31 @@
                         <ol>
                             <!-- 입력 사진 선택 -->
                             <li>
-                                <h4>Load the face image to be used to create the embedding</h4>
-                                <p>
-                                    <input class="form-control" type="file" name="imagefile" id="image" onchange="setThumbnail(event)" required  accept=".jpeg, .jpg, .png">
-                                </p>
+                                <p>Load the face image to create the embedding</p> 
+                                <p><input class="form-control" type="file" name="imagefile" id="image" onchange="setThumbnail(event)" required  accept=".jpeg, .jpg, .png"></p>
                                 <div id="image_container"></div>
                             </li>
 
                             <!-- 입력 문장 작성 -->
                             <li>
-                                <h4>Write the text you want to synthesize</h4>
-                                <p>
-                                    <textarea name="inputtext" id="text" required >Welcome to the Face2Voice!&#10;To begin, load an face image from your datasets.Once its embedding has been created, then synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds. &#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.</textarea>
-                                </p>
+                                <p>Write the text you want to synthesize</p>
+                                <p><textarea name="inputtext" id="text" required >Welcome to the Face2Voice!&#10;To begin, load an face image from your datasets.Once its embedding has been created, then synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds. &#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.</textarea></p>
                             </li> 
                         </ol>
                         <ol id="btn_input">
                             <li id="btn">
                                 <!-- 음성 합성 버튼 -->
-                                <input id="btn_inference" type="submit" value="Synthesizing voice" onclick="showProgress()" >
+                                <input id="btn_inference" type="submit" value="Synthesizing Voice" onclick="showProgress()" >
                             </li>  
                         </ol>   
                     </form>
                 </div>
 
                 <div id="inference_progress">
+                    <div id="progress_caution_message">
+                        <img src="{{ url_for('static', filename='images/icon/caution.png') }}">
+                         Do not press the Refresh or Back button  
+                    </div>
                     <!-- 음성 합성 경과를 보여주는 메시지와 progress bar-->
                     <div id="progress_mel_container">
                         <span id="progress_status">Creating Embedding...</span>
@@ -138,10 +140,6 @@
                         <div id="progress">       
                             <div id="progress_bar"></div>
                         </div>
-                    </div>
-                    <div id="progress_caution_message">
-                        <img src="{{ url_for('static', filename='images/icon/caution.png') }}">
-                        CAUTION: Do not press the Refresh or Back button  
                     </div>
                 </div>
             </div>

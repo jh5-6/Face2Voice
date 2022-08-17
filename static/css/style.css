@@ -1,17 +1,12 @@
-@font-face { font-family: 'NanumGothic';
-    src: url('/fonts/NanumGothic.eot');
-    src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),url('/fonts/NanumGothic.woff') format('woff');
-}
-
 body {
     margin: 0;
     background : #E2E2E2;
-    font-family: 'NanumGothic', 'serif';
+    font-family: 'Montserrat Alternates', sans-serif;
     font-size: calc(12px + 0.390625vw);
+    overflow: auto;
   }
 
 div.menu {
-
     background: black;
 
     width: 100%;
@@ -59,27 +54,51 @@ nav li a:hover {
     color: rgb(218, 218, 218);
 }
 
+a {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
 div.header {
     width: 70%;
-    height: 15vh; 
+    height: 10vh; 
     margin: auto;
+
 }
 
 div.container{
     width: 70%;
-    height: 80vh;
+    height: 85vh;
     margin: auto;
 }
 
 div.container #sub_container{
     padding-left: 5%;
     padding-right: 5%;
-    padding-top: 2%;
+    padding-top: 5%;
     padding-bottom: 9%;
 }
 
 #paper_container, #code_container {
     padding-bottom: 5%;
+}
+
+#paper_container ol, #code_container ol, #license_container ol{
+    font: 1.4em;
+}
+
+#result_textbox {
+    float: right;
+    overflow: auto;
+
+    width: 70%;
+    height: 29vh;
+    margin-left: 1%;
+    padding: 2%;
+    border-radius: 10px;
+    border-style: dotted rgb(242, 242, 242); 
+    /* background-color: rgb(242, 242, 242);  */
+    font-size: 1.3em;
+    font-weight: 400;
 }
 
 div.container li a{
@@ -93,20 +112,22 @@ div.container li a:hover{
 }
 
 #image_container {
-    height: 33vh;
+    height: 29vh;
 }
 
 #image_container img{
     height: 100%;
 }
 
-
-li #image{
-    height: 100%;
+input#image {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 0.6em;
+    ;
 }
 
-#form ol li {
-    margin-top: 7%;
+#form ol li p{
+    margin-top: 3%;
+    font-size: 1.5em;
 }
 
 #result_container {
@@ -130,6 +151,7 @@ li #image{
     padding-right: 30px;
 
     display: inline-block;
+    font-family: 'Montserrat Alternates', sans-serif;
     text-align: center;
     line-height: 50px;
     color: white;
@@ -166,6 +188,7 @@ div#inference_progress {
 
 #percent{
     float: right;
+    font-weight: bold;
 }
 
 span {
@@ -220,39 +243,38 @@ span {
 
 #progress_caution_message img {
     width: 1.3em;
-    padding-right: 2px;
+    padding-right: 3px;
     vertical-align: middle;
 }
 
 textarea {
     padding: auto;
     width: 95%; 
-    height: 13em; 
-    font-size: 16px;
+    height: 9em; 
+    font-size: 0.7em;
+    font-family: 'Montserrat Alternates', sans-serif;
 }
 
 table{
     width: 100%;
+    text-align: left;
 }
 
 #line {
     color: rgb(242, 242, 242);  
     border-style: solid;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
-tr#row_padding{
-    padding-top: 10px;
-}
 
 #home_text_container {
-    font-style: italic;
     line-height: 1.6em;
+    margin-bottom: 2%;
+    font-size: 1.4em;
 }
 
-#text_kor, #text_en{
+#example_container {
     margin-top: 5%;
-    font-size: 1em;
 }
 
 .header h2 {
@@ -267,9 +289,10 @@ img {
 h1{
     padding-left: 5%;
     padding-right: 5%;
-    padding-top: 5%;
+    padding-top: 2%;
 
     font-size: 3em;
+    font-weight: 700;
 }
 
 h2 {
