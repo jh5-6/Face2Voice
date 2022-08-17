@@ -4,8 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
         <title>Face2Voice</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
     </head>
 
     <body>
@@ -31,20 +34,17 @@
                     {% if cropimagefile %}
                     <div id="image_container">
                         <img src="{{ url_for('static', filename=cropimagefile)}}" alt="Cropped Face Image">
-                    </div>
-                    {% endif %} 
-
-                    <!-- 입력 문장 출력 -->
-                    <h5> "
-                        {% with messages = get_flashed_messages() %}
+                        <div id="result_textbox">
+                            {% with messages = get_flashed_messages() %}
                             {% if messages %} 
                             {% for message in messages %}
                                 {{ message }}
                             {% endfor %}
                             {% endif %}
                         {% endwith %}
-                        "
-                    </h5>
+                        </div>
+                    </div>
+                    {% endif %} 
 
                     <!-- 합성된 음성 출력 -->
                     {% if audiofile %} 
@@ -58,7 +58,6 @@
                 </div>
                 <div id="btn_input">
                     <div id="btn">
-                        <!-- 음성 합성 버튼 -->
                         <button id="btn_again" type="button" onclick=window.location.href="{{ url_for('face2voice')}}">DO IT AGAIN</button>
                     </div>  
                 </div>   
