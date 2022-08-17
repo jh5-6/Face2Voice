@@ -62,10 +62,13 @@ def preprocess_img(fpath):
 
     img_filename = fpath.split(app.config['UPLOAD_FOLDER'] + '\\')[1]
     image_path = os.path.join(app.config['CROP_FOLDER'], 'crop_' + img_filename)
-    mtcnn(img, save_path = image_path, return_prob=True)    
+    mtcnn(img, save_path = image_path, return_prob=True)
     img_face = cv2.imread(image_path)
+
+    if not os.path.exists(image_path):
+        return None
+
     img_face = torch.tensor(img_face).permute(2, 0, 1)
-    
     img_aligned = img_face.float() / 255.0 
     aligned = img_aligned.unsqueeze(0)
 
@@ -157,12 +160,11 @@ def face2voice_result( ):
         imagefile.save(image_path)
         # flash("Image successfully uploaded and displayed below")
 
-        # 음성 합성 결과 출력 시 
-        # 입력으로 넣은 문장 보여주기 위해 face2voice_result.html에 입력 문장 넘겨줌
-        flash(input_text)
-
         # 전처리한 이미지와 입력 문장을 이용해 음성 합성
         input_img = preprocess_img(image_path)
+        if input_img == None:
+            return render_template('face2voice_result.html', resultmessage = 'Face Not Found!')
+
         wav = inference(input_img, input_text)
 
         # 합성된 음성 저장 
@@ -171,7 +173,7 @@ def face2voice_result( ):
         audio_path = os.path.join(app.config['GENAUDIO_FOLDER'], genfilename)
         sf.write(audio_path, wav, Synthesizer.sample_rate)
      
-        return render_template('face2voice_result.html', cropimagefile = 'images/crop_image/' + 'crop_' + imagefile.filename, audiofile = 'audio/gen_audio/' + genfilename)
+        return render_template('face2voice_result.html', resultmessage = "Check your voice!", cropimagefile = 'images/crop_image/' + 'crop_' + imagefile.filename, inputtext = input_text, audiofile = 'audio/gen_audio/' + genfilename)
 
     else:
         # flash('Allowed image types are - png, jpg, jpeg')
