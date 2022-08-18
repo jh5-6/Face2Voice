@@ -46,6 +46,13 @@ DataSet
 
 We learned the lip2speech model using [avspeech](https://looking-to-listen.github.io/avspeech/download.html) data.
 
+
+
+<div align="left">
+  <img src="https://ifh.cc/g/J6Cbw8.png" width="480"/>
+</div>
+
+We learned the SV2TTS model using the [Librispeech](http://www.openslr.org/12) train-clean-100 data.
 <br>
 
 Setup 
