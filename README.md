@@ -81,5 +81,3 @@ Use the flask command
 ```python app.py```
 or
 ```flask run```
-
-
