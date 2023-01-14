@@ -1,20 +1,19 @@
 body {
     margin: 0;
+    background : #E2E2E2;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: calc(12px + 0.390625vw);
+    overflow: auto;
   }
-  
-div.menu {
 
+div.menu {
     background: black;
 
     width: 100%;
-    height: 50px;
-    top: 0;
+    height: 5vh;
 
     display: table;
     position: relative;
-
-    margin: 0;
-    padding: 0;
 }
 
 nav {
@@ -30,14 +29,13 @@ nav {
 nav ul {
     list-style-type: none;
     padding: 0;
-
     display: block;
 }
 
 nav li {
     clear: both;
     font-family: 'Arial',Arial,sans-serif;
-    font-size: 16px;
+    font-size: 0.9em;
     display: inline-block;
     padding-left: 15px;
     padding-right: 15px;
@@ -56,115 +54,296 @@ nav li a:hover {
     color: rgb(218, 218, 218);
 }
 
-div.header {
-    margin: 0;
-
-    padding-top: 90px;
-    padding-bottom: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-    position: relative;
-
-    margin: 0;
-
-    max-width: 609px;
-    width: 100%
+a {
+    font-family: 'Montserrat Alternates', sans-serif;
 }
 
-div.container {
+div.header {
+    width: 70%;
+    height: 10vh; 
+    margin: auto;
 
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
+}
 
-    align-items: center; 
-    position: relative;
+div.container{
+    width: 70%;
+    height: 85vh;
+    margin: auto;
+}
 
-    max-width: 609px;
-    width: 100%
+div.container #sub_container{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 9%;
+}
+
+#paper_container, #code_container {
+    padding-bottom: 5%;
+}
+
+#paper_container ol, #code_container ol, #license_container ol{
+    font: 1.4em;
+}
+
+
+table img{
+    width: 95%;
+}
+
+#table_split {
+    border-right: 10px solid #dadada;
+    padding-right: 2%;
+    text-align: right;
+    border-spacing: 0px;
+}
+
+#table_padding {
+    padding-left: 2%;
+}
+
+#table_result {
+    width: 100%;
+    border-spacing: 30px;
+}
+
+#result_inputtext {
+    overflow: auto;
+    width: 95%;
+    height: 100%;
+    margin: auto;
+    padding: 2%;
+    border-style: solid;
+    border-color: rgb(242, 242, 242);
+    border-width: 3px 0px 3px 0px; 
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+#table_result_col1 {
+    column-width: 30vw;
+}
+
+#table_result_col1 img {
+    width: 100%;
+}
+
+#result_inputtext {
+    min-height: 25vh;
+}
+
+#table_result_col2 {
+    column-width: 70vw;
+}
+
+#table_result #btn_input{
+    margin-top: 5%;
+}
+
+div.container li a{
+    text-decoration: none;
+    color : black;
+}
+
+div.container li a:hover{
+    text-decoration: none;
+    color: rgb(101, 101, 101);
 }
 
 #image_container {
-    height: 33vh;
+    height: 29vh;
 }
 
-#form ol{
-    padding-inline-start: 40px;
-    padding-inline-end: 40px;
+#image_container img{
+    height: 100%;
 }
 
-#btn {
-    padding-inline-start: 40px;
-    padding-inline-end: 40px;
-    margin-top: 90px;
+input#image {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 0.6em;
+    ;
 }
 
-div#btn input{
-   font-size: 18px;
+#form ol li p{
+    margin-top: 3%;
+    font-size: 1.5em;
 }
 
-#progress_container {
-    visibility: hidden;
+#btn_input{
+    text-align: center;
+}
+
+#btn_input li#btn, #btn {
+    width: 100%;
+    list-style:none;
+    display: inline-block;
+}
+
+#btn_input li#btn #btn_inference, #btn_again{
+    margin: 10px 20px 10px 0;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    display: inline-block;
+    font-family: 'Montserrat Alternates', sans-serif;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+
+    background-color: rgb(58, 57, 57);
+    box-shadow: 0px 5px 0px 0px #000000;
+    border-radius: 10px;
+    transition: all 0.2s ;
+    font-size: 1em;
+}
+
+#btn_input li#btn #btn_inference:hover, #btn_again:hover {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    box-shadow: 0px 0px 0px 0px #000000;
+    color: #E2E2E2;
+  }
+
+div#inference_progress {
+    width: 50%;
+    margin: auto;
+    padding-top: 15vh;
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+#progress_mel_container, #progress_container, #progress_caution_message {
+    margin-top: 5%;
+}
+
+#percent{
+    float: right;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+span {
+    font-size: 1.3em;
 }
 
 #progress {
     width: 100%;
-    background-color: rgb(242, 242, 242);    
+    margin-top: 1%;
+    background-color: rgb(242, 242, 242);   
+    border-radius: 5px; 
     overflow: hidden;
 }
 
 #progress_bar {
     width: 0%;
-    height: 30px;
+    height: 5vh;
     background-color: green;
 }
 
 #infinite_progress {
     width: 100%;
+    margin-top: 1%;
     background-color: rgb(242, 242, 242);    
     overflow: hidden;
+    border-radius: 5px;
 }
 
 #infinite_progressbar {
     width: 30%;
-    height: 30px;
-    left: -100%;
-    background-color: green;
+    height: 5vh;
+    left: -400%;
+    background-color: green;  
     animation: loading 2s ease-in 0.5s infinite;
   }
   
 @keyframes loading {
     0% {
-        transform:translateX(-100%)
+        transform:translateX(-200%)
     }
     to {
         transform:translateX(400%)
     }
 }
 
-#percent {
-    position: relative;
-    text-align: right;
-}
-
-#progress_mel_container {
-    visibility: hidden;
-}
-
 #progress_caution_message {
-    visibility: hidden;
-    color: orange;
-}
-
-
-h1 {
-    font-size: 3em;
+    width: 100%;
+    height: 10%;
+    font-size: 1.3em;
     font-weight: bold;
 }
 
+#progress_caution_message img {
+    width: 1.3em;
+    padding-right: 3px;
+    vertical-align: middle;
+}
+
 textarea {
-    width: 100vmin; 
-    height: 10em; 
+    padding: 1%;
+    width: 95%; 
+    height: 9em; 
+    font-size: 0.7em;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+#table_home{
+    text-align: left;
+    column-width: 19vw;
+}
+
+#line {
+    color: rgb(242, 242, 242);  
+    border-style: solid;
+    margin-top: 3%;
+}
+
+
+#home_text_container {
+    line-height: 1.6em;
+    margin-bottom: 2%;
+    font-size: 1.4em;
+}
+
+#example_container {
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+
+.header h2 {
+    text-align: center;
+}
+
+img {
+    border-radius: 5px;
+}
+
+
+h1{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+
+    font-size: 3em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.7em;
+    color: rgb(58, 57, 57);
+}
+
+h4 {
+    font-size: 1.5em;
+}
+
+h5 {
+    font-size: 1.2em;
 }

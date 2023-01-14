@@ -22,9 +22,11 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # 입력 사진 첨부 시 확장자 제한
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 # 입력 사진 저장 폴더
-app.config['UPLOAD_FOLDER'] = 'static/images'
+app.config['UPLOAD_FOLDER'] = 'static/images/input_image'
+# 얼굴 crop 사진 저장 폴더
+app.config['CROP_FOLDER'] = 'static/images/crop_image'
 # 합성된 음성 저장 폴더
-app.config['GENAUDIO_FOLDER'] = 'static/genAudio'
+app.config['GENAUDIO_FOLDER'] = 'static/audio/gen_audio'
 
 # 입력 이미지 전처리 
 # 입력으로 들어온 사진 중 사람의 얼굴 부분만 자르기 위해 사용 
@@ -58,11 +60,15 @@ def preprocess_img(fpath):
     # img = Image.fromarray(img)
     # img = img.astype(np.float64)
 
-    image_path = os.path.join(app.config['UPLOAD_FOLDER'], "UseMtcnnToCutOnlyTheFace.jpg")
-    mtcnn(img, save_path = image_path, return_prob=True)    
+    img_filename = fpath.split(app.config['UPLOAD_FOLDER'] + '\\')[1]
+    image_path = os.path.join(app.config['CROP_FOLDER'], 'crop_' + img_filename)
+    mtcnn(img, save_path = image_path, return_prob=True)
     img_face = cv2.imread(image_path)
+
+    if not os.path.exists(image_path):
+        return None
+
     img_face = torch.tensor(img_face).permute(2, 0, 1)
-    
     img_aligned = img_face.float() / 255.0 
     aligned = img_aligned.unsqueeze(0)
 
@@ -154,12 +160,11 @@ def face2voice_result( ):
         imagefile.save(image_path)
         # flash("Image successfully uploaded and displayed below")
 
-        # 음성 합성 결과 출력 시 
-        # 입력으로 넣은 문장 보여주기 위해 face2voice_result.html에 입력 문장 넘겨줌
-        flash(input_text)
-
         # 전처리한 이미지와 입력 문장을 이용해 음성 합성
         input_img = preprocess_img(image_path)
+        if input_img == None:
+            return render_template('face2voice_result.html', resultmessage = 'Face Not Found!')
+
         wav = inference(input_img, input_text)
 
         # 합성된 음성 저장 
@@ -168,21 +173,11 @@ def face2voice_result( ):
         audio_path = os.path.join(app.config['GENAUDIO_FOLDER'], genfilename)
         sf.write(audio_path, wav, Synthesizer.sample_rate)
      
-        return render_template('face2voice_result.html', filename = filename, audiofile = genfilename)
+        return render_template('face2voice_result.html', resultmessage = "Check your voice!", cropimagefile = 'images/crop_image/' + 'crop_' + imagefile.filename, inputtext = input_text, audiofile = 'audio/gen_audio/' + genfilename)
 
     else:
         # flash('Allowed image types are - png, jpg, jpeg')
         return redirect(request.url)
-
-
-@app.route('/display/<filename>')
-def display_image(filename):
-    return redirect(url_for('static', filename='images/' + filename), code=301)
-
-
-@app.route('/play/<audiofile>')
-def play(audiofile):
-    return redirect(url_for('static', filename='genAudio/' + audiofile), code=301)
 
 
 if __name__ == "__main__":

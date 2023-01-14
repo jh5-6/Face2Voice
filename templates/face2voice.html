@@ -4,9 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <title>Face2Voice</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
 
         <script>
             //파일에서 불러온 사진 보여줌
@@ -45,15 +48,12 @@
             function showProgress() {
 
                 if (isValidInput()) {
-
                     //progress bar와 progress 메시지만 보이도록 
                     //입력 사진, 문장 보이지 않게 설정
                     document.getElementById("nav").style.visibility = 'hidden';
                     document.getElementById("form").style.display ='none';
-                    document.getElementById("progress_mel_container").style.visibility = 'visible';  
-                    document.getElementById("progress_container").style.visibility ='visible';
-                    document.getElementById("progress_caution_message").style.visibility = 'visible';
-
+                    document.getElementById("inference_progress").style.display = 'initial'; 
+                    
                     // 일정 간격마다 내장 메소드를 실행
                     // progress bar 길이 update함으로써
                     // 음성 합성 경과를 보여줌
@@ -67,10 +67,11 @@
                             total = response['total'];
 
                             if (progressed != 0 && total != 0) {
-                                $('#progress_status').text("Mel Spectrogram Generation Completed!");
+                                $('#infinite_progress_status').text("Embedding creation complete!");
+                                $('#progress_status').text("Synthesizing voice...");
                                 document.getElementById("infinite_progress").style.backgroundColor = "green";
                                 document.getElementById("infinite_progressbar").style.visibility ='none';
-                                document.getElementById("progress_container").style.visibility ='visible';
+                
                                 $('#progress_bar').width((progressed / total) * 100 + "%");  
                                 $('#percent').html(((progressed / total) * 100).toFixed(2) + "%")
                             }
@@ -91,59 +92,58 @@
                     <li><a href="{{ url_for('home')}}"> HOME</a></li>
                     <li><a href="{{ url_for('face2voice')}}"> TRY FACE2VOICE</a></li>
                     <li><a href="{{ url_for('references')}}"> REFERENCES</a></li>
+                    <li><a href="https://github.com/jh5-6/Face2Voice"> GITHUB</a></li>
                 </ul>
             </nav>
         </div>
 
-        <div class="header">
-            <!-- <h1>Face2Voice</h1> -->
-        </div>
-
         <div class="container">
-            <div>
-                <form method="post" id="form" action="/face2voice_result" enctype="multipart/form-data">
-                    <ol>
-                        <!-- 입력 사진 선택 -->
-                        <li>
-                            <h4> Load a face image to embed </h4>
-                            <p>
-                                <input class="form-control" type="file" name="imagefile" id="image" onchange="setThumbnail(event)" required  accept=".jpeg, .jpg, .png">
-                            </p>
-                            <div id="image_container"></div>
-                        </li>
+            <div id="sub_container">
+                <div>
+                    <form method="post" id="form" action="/face2voice_result" enctype="multipart/form-data">
+                        <ol>
+                            <!-- 입력 사진 선택 -->
+                            <li>
+                                <p>Load the face image to create the embedding</p> 
+                                <p><input class="form-control" type="file" name="imagefile" id="image" onchange="setThumbnail(event)" required  accept=".jpeg, .jpg, .png"></p>
+                                <div id="image_container"></div>
+                            </li>
 
-                        <!-- 입력 문장 작성 -->
-                        <li>
-                            <h4> Write down the text you want to synthesize </h4>
-                            <p>
-                                <textarea name="inputtext" id="text" required >Welcome to the toolbox! To begin, load an face image from your datasets or capture one yourself.&#10;Once its embedding has been created, you can synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds.&#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.&#10;On the left you have the embedding projections. Load or record more images to see them.&#10;If you have at least 2 or 3 images from a same speaker, a cluster should form.&#10;Synthesized utterances are of the same color as the speaker whose voice was used, but they're represented with a cross.</textarea>
-                            </p>
-                        </li> 
-                    </ol>
-
-                    <!-- 음성 합성 버튼 -->
-                    <div id="btn">
-                        <input class="btn-inference" type="submit" value="Speech Synthesis" onclick="showProgress()" >
-                    </div>       
-                </form>
-            </div>
-
-            <!-- 음성 합성 경과를 보여주는 메시지와 progress bar-->
-            <div id="progress_mel_container">
-                <h3 id="progress_status">Generating Melspectrograms...</h3>
-                <div id="infinite_progress">
-                    <div id="infinite_progressbar"></div>
+                            <!-- 입력 문장 작성 -->
+                            <li>
+                                <p>Write the text you want to synthesize</p>
+                                <p><textarea name="inputtext" id="text" required >Welcome to the Face2Voice!&#10;To begin, load an face image from your datasets. Once its embedding has been created, then synthesize any text written here.&#10;The synthesizer expects to generate outputs that are somewhere between 5 and 12 seconds. &#10;To mark breaks, write a new line. Each line will be treated separately.&#10;Then, they are joined together to make the final spectrogram. Use the vocoder to generate audio.&#10;The vocoder generates almost in constant time, so it will be more time efficient for longer inputs like this one.</textarea></p>
+                            </li> 
+                        </ol>
+                        <ol id="btn_input">
+                            <li id="btn">
+                                <!-- 음성 합성 버튼 -->
+                                <input id="btn_inference" type="submit" value="Synthesizing Voice" onclick="showProgress()" >
+                            </li>  
+                        </ol>   
+                    </form>
                 </div>
-            </div>
-            <div id="progress_container">
-                <h3>Synthesizing voice...</h3>
-                <div id="progress">       
-                    <div id="progress_bar"></div>
+
+                <div id="inference_progress">
+                    <div id="progress_caution_message">
+                        <img src="{{ url_for('static', filename='images/icon/caution.png') }}">
+                         Do not press the Refresh or Back button  
+                    </div>
+                    <!-- 음성 합성 경과를 보여주는 메시지와 progress bar-->
+                    <div id="progress_mel_container">
+                        <span id="infinite_progress_status">Creating Embedding...</span>
+                        <div id="infinite_progress">
+                            <div id="infinite_progressbar"></div>
+                        </div>
+                    </div>
+                    <div id="progress_container">
+                        <span id="progress_status"></span>  
+                        <span id="percent"></span>
+                        <div id="progress">       
+                            <div id="progress_bar"></div>
+                        </div>
+                    </div>
                 </div>
-                <div id="percent"></div>
-            </div>
-            <div id="progress_caution_message">
-                CAUTION: Do not press the Refresh or Back button
             </div>
         </div>
     </body>

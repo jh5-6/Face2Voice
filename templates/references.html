@@ -4,8 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <title>Face2Voice</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
     </head>
 
     <body>     
@@ -15,6 +19,7 @@
                     <li><a href="{{ url_for('home')}}"> HOME</a></li>
                     <li><a href="{{ url_for('face2voice')}}"> TRY FACE2VOICE</a></li>
                     <li><a href="{{ url_for('references')}}"> REFERENCES</a></li>
+                    <li><a href="https://github.com/jh5-6/Face2Voice"> GITHUB</a></li>
                 </ul>
             </nav>
         </div>
@@ -24,21 +29,31 @@
         </div>
 
         <div class="container">
-            <div>
-                <h2>Paper</h2>
-                <ol>
-                    <li>참고논문</li>
-                    <li>참고논문</li>
-                    <li>참고논문</li>
-                </ol>
-            </div>
-            <div>
-                <h2>Code</h2>
-                <ol>
-                    <li>참고코드</li>
-                    <li>참고코드</li>
-                    <li>참고코드</li>
-                </ol>
+            <div id="sub_container">
+                <div id="paper_container">
+                    <h3>Paper</h3>
+                    <ol> 
+                        <li><a href = "https://arxiv.org/pdf/1806.04558.pdf">Ye Jia 外 11(2019)「Transfer Learning from Speaker Verification to Multispeaker Text-To-Speech Synthesis」</a> </li><br>
+                        <li> <a href = "https://arxiv.org/pdf/2206.14009.pdf"> Christen Millerdurai 外 2(2022)「Show Me Your Face, And I’ll Tell You How You Speak」</a> </li><br>
+                        <li> <a href = "https://arxiv.org/pdf/1905.09773.pdf"> Tae-Hyun Oh 外 6(2019)「Speech2Face: Learning the Face Behind a Voice」 </a> </li>               
+                    </ol> 
+                </div>
+
+                <div id="code_container">
+                    <h3>Code</h3>
+                    <ol> 
+                        <li> <a href = "https://github.com/CorentinJ/Real-Time-Voice-Cloning">SV2TTS </a> </li><br>
+                        <li> <a href = "https://github.com/Chris10M/Lip2Speech"> Lip2Speech</a> </li><br>
+                        <li> <a href = "https://github.com/saiteja-talluri/Speech2Face"> Speech2Face </a> </li>
+                    </ol> 
+                </div>
+
+                <div id="license_container">
+                    <h3>Free license image</h3>
+                    <ol>
+                        <li><a href="https://www.flaticon.com/free-icons/caution" title="caution icons">Caution icons created by Tempo_doloe - Flaticon</a></li>
+                    </ol>
+                </div>
             </div>
         </div>
     </body>
