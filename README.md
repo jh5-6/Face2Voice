@@ -1,8 +1,6 @@
 # Face2Voice
 
-#### <i>A web application that synthesizes and outputs voice when you enter face image and text.</i>
-
-We propose a model that synthesizes human voice audio from human face input images.<br>
+ We propose a model that synthesizes human voice audio from human face input images.<br>
 Our model takes human face images and text as inputs. Note that our goal is not to synthesize accurate human voices, but to implement characteristic voice functions that correlate with input images. 
 
 <div align = "left">
